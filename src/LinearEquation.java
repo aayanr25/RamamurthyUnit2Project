@@ -13,18 +13,18 @@ public class LinearEquation {
 
     public double distance() {
         double dist = Math.sqrt(Math.pow((x2 - x1), 2) + (Math.pow((y2 - y1), 2)));
-        return Math.round(dist * 100) / 100.0;
+        return roundedToHundredth((dist * 100) / 100.0);
     }
 
     public double slope() {
         double rise = y2 - y1;
         double run = x2 - x1;
-        return Math.round(rise / run * 100) / 100.0;
+        return roundedToHundredth((rise / run * 100) / 100.0);
     }
 
     public double yIntercept() {
         double intercept = y1 - (slope() * x1);
-        return Math.round(intercept * 100) / 100.0;
+        return roundedToHundredth((intercept * 100) / 100.0);
     }
 
     public String equation() {
@@ -38,7 +38,21 @@ public class LinearEquation {
     }
     public String coordinateForX(double xValue) {
         double yValue = slope() * xValue + yIntercept();
-        return "(" + xValue + ", " + yValue + ")";
+        return "(" + (int) xValue + ", " + (int) yValue + ")";
+    }
+
+    public String lineInfo() {
+        String str = "The two points are: ";
+        str += coordinateForX(x1) + " and " + coordinateForX(x2);
+        str += "\nThe equation of the line between these points is: " + equation();
+        str += "\nThe slope of this line is: " + slope();
+        str += "\nThe y intercept of this line is: " + yIntercept();
+        str += "\nThe distance between these points is " + distance();
+        return str;
+    }
+
+    public double roundedToHundredth(double toRound) {
+        return Math.round(toRound * 100) / 100.0;
     }
 
 }
