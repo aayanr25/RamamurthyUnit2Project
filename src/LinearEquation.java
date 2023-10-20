@@ -38,12 +38,12 @@ public class LinearEquation {
     }
     public String coordinateForX(double xValue) {
         double yValue = slope() * xValue + yIntercept();
-        return "(" + (int) xValue + ", " + (int) yValue + ")";
+        return "(" + xValue + ", " + yValue + ")";
     }
 
     public String lineInfo() {
         String str = "The two points are: ";
-        str += coordinateForX(x1) + " and " + coordinateForX(x2);
+        str += "(" + x1 + ", " + y1 + ") and (" + x2 + ", " + y2 + ")";
         str += "\nThe equation of the line between these points is: " + equation();
         str += "\nThe slope of this line is: " + slope();
         str += "\nThe y intercept of this line is: " + yIntercept();
