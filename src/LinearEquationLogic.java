@@ -2,18 +2,24 @@ import java.util.Scanner;
 public class LinearEquationLogic {
     private LinearEquation line;
     private Scanner scan;
+    private boolean slopeUndefined;
     public LinearEquationLogic() {
         line = null;
         scan = new Scanner(System.in);
     }
     public void start() {
-        Scanner scan = new Scanner(System.in);
         String str = "";
         while (!str.equals("n")) {
             getCoordinates();
-            secondPart();
+            if (slopeUndefined) {
+                System.out.println("You cannot enter 2 points with the same x value.");
+            } else {
+                System.out.println("Your line has been created.\n");
+                secondPart();
+            }
             System.out.print("Would you like to enter another pair of coordinates? y/n: ");
             str = scan.nextLine();
+            System.out.println();
         }
     }
     private void getCoordinates() {
@@ -34,8 +40,13 @@ public class LinearEquationLogic {
         String yCoordinate2 = coordinate2.substring(idx + 2, idx2);
         int y2 = Integer.parseInt(yCoordinate2);
 
+        slopeUndefined = false;
+        if (x1 == x2) {
+            slopeUndefined = true;
+        }
+
         line = new LinearEquation(x1, y1, x2, y2);
-        System.out.println("Your line has been created.\n");
+
     }
 
     private void secondPart() {
@@ -43,6 +54,7 @@ public class LinearEquationLogic {
         System.out.println();
         System.out.print("Enter an x value: ");
         double num = scan.nextDouble();
+        scan.nextLine();
         System.out.println("The point on the line is " + line.coordinateForX(num));
 
 
