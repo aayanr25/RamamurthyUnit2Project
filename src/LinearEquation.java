@@ -30,16 +30,34 @@ public class LinearEquation {
     public String equation() {
         int rise = (int) y2 - y1;
         int run = (int) x2 - x1;
-        String slopeInEquation = "";
-        if (rise % run == 0) {
-            slopeInEquation = "" + rise / run;
-        } else if (rise == run) {
+        String slopeInEquation;
+        String yIntInEquation;
+        if (rise == run) {
             slopeInEquation = "";
-        } else if (slope() == -1) {
+        } else if (rise % run == 0) {
+            slopeInEquation = "" + rise / run;
+        } else if (slope() == -1.0) {
             slopeInEquation = "-";
-        } else if ()
+        } else if (rise < 0 || run < 0) {
+            slopeInEquation = "-" + Math.abs(rise) + "/" + Math.abs(run);
+            if (rise % run == 0) {
+                slopeInEquation = "-" + Math.abs(rise / run);
+            }
+        } else {
+            slopeInEquation = rise + "/" + run;
+        }
+        if (yIntercept() == 0) {
+            yIntInEquation = "";
+            if (slope() == 0.0) {
+                return "y = 0";
+            }
+        } else if (yIntercept() < 0) {
+            yIntInEquation = "- " + Math.abs(yIntercept());
+        } else {
+            yIntInEquation = "+ " + yIntercept();
+        }
 
-            return "y =" + slopeInEquation + "x + " + yIntercept();
+            return "y = " + slopeInEquation + "x " + yIntInEquation;
 
     }
     public String coordinateForX(double xValue) {
