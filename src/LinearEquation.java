@@ -28,36 +28,59 @@ public class LinearEquation {
     }
 
     public String equation() {
+        // obtaining "nice" slope
         int rise = (int) y2 - y1;
         int run = (int) x2 - x1;
         String slopeInEquation;
         String yIntInEquation;
         if (rise == run) {
-            slopeInEquation = "";
+            slopeInEquation = "x ";
         } else if (rise % run == 0) {
-            slopeInEquation = "" + rise / run;
-        } else if (slope() == -1.0) {
-            slopeInEquation = "-";
-        } else if (rise < 0 || run < 0) {
-            slopeInEquation = "-" + Math.abs(rise) + "/" + Math.abs(run);
-            if (rise % run == 0) {
-                slopeInEquation = "-" + Math.abs(rise / run);
+            if (slope() == 0) {
+                slopeInEquation = "";
+            } else if (slope() == -1) {
+                slopeInEquation = "-x ";
             }
-        } else {
-            slopeInEquation = rise + "/" + run;
+            else {
+                slopeInEquation = "" + rise / run + "x ";
+            }
+        } else if (slope() == -1.0) {
+            slopeInEquation = "-x ";
+        } else if (rise < 0 || run < 0) {
+            if (rise < 0 && run < 0) {
+                slopeInEquation = "" + Math.abs(rise) + "/" + Math.abs(run) + "x ";
+            }
+            else if (rise % run == 0) {
+                if (rise / run == -1) {
+                    slopeInEquation = "-x ";
+                } else {
+                    slopeInEquation = "-x " + Math.abs(rise / run);
+                }
+            } else {
+                slopeInEquation = "-" + Math.abs(rise) + "/" + Math.abs(run) + "x ";
+            }
         }
+        else {
+            slopeInEquation = rise + "/" + run + "x ";
+        }
+
+        // obtaining y intercept based on "nice" slope
         if (yIntercept() == 0) {
             yIntInEquation = "";
             if (slope() == 0.0) {
                 return "y = 0";
             }
+        }
+        else if (slope() == 0) {
+            yIntInEquation = "" + (int) yIntercept();
         } else if (yIntercept() < 0) {
             yIntInEquation = "- " + Math.abs(yIntercept());
-        } else {
+        }
+        else {
             yIntInEquation = "+ " + yIntercept();
         }
 
-            return "y = " + slopeInEquation + "x " + yIntInEquation;
+            return "y = " + slopeInEquation + "" + yIntInEquation;
 
     }
     public String coordinateForX(double xValue) {
